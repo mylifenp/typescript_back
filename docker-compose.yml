@@ -1,0 +1,41 @@
+version: "3.8"
+services:
+  mongo:
+    image: "mongo:latest"
+    restart: "always"
+    container_name: "mongo"
+    env_file:
+      - ./.docker/database/.env
+    volumes:
+      - ./.docker/database/mongod.conf:/etc/mongod.conf
+      - ./.docker/database/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+      - ./.docker/database/data/db:/data/db/
+      - ./.docker/database/data/log/:/var/log/database/
+    ports:
+      - "27017:27017"
+    #command: ["mongod", "-f", "/etc/mongod.conf"]
+  lenses_back:
+    container_name: "lenses_back"
+    hostname: "lenses_back"
+    restart: "always"
+    env_file:
+      - .env.production
+    build: .
+    #command: "npm run start"
+    volumes:
+      - .:/app/
+      - /app/node_modules
+    ports:
+      - "8081:8081"
+    links:
+      - mongo
+    depends_on:
+      - mongo
+
+  
+
+volumes:
+  mongo-data:
+
+# networks:
+#   default:

@@ -15,3 +15,4 @@ doc_bkup.7z
 .docker/database/data
 src/log/
 dist/
+build/
