@@ -1,0 +1,17 @@
+logfile
+
+.env
+
+node_modules/
+
+*.pdf
+
+debug.log
+.env.local
+.env
+.env.dist
+.env.production
+doc_bkup.7z
+.docker/database/data
+src/log/
+dist/
