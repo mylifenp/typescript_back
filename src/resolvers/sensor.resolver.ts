@@ -124,10 +124,13 @@ export default {
       const { housing_y, optical_center_y } = sensor;
       return centerShiftY(housing_y, optical_center_y);
     }),
-    complete: combineResolvers(
-      async (sensor, args, { models }) =>
-        await models.Complete.findById(sensor.complete)
-    ),
+    complete: combineResolvers(async (sensor, args, { models }) => {
+      // console.log("sensor", sensor.complete);
+      // TODO _complete is set to null, even though it should get the value from  Complete model
+      const _complete = await models.Complete.findById(sensor.complete);
+      console.log("_complete", _complete);
+      return _complete;
+    }),
     sensor_type: combineResolvers(
       async (sensor, args, { models }) =>
         await models.SensorType.findById(sensor.sensor_type)

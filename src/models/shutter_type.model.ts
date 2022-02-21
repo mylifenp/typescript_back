@@ -6,11 +6,16 @@ export interface ShutterType {
   updatedAt: Date;
 }
 
-const shutterTypeSchema = new Schema({
-  name: {
-    type: String,
-    unique: true,
+const shutterTypeSchema = new Schema(
+  {
+    name: {
+      type: String,
+      unique: true,
+    },
   },
-});
+  {
+    timestamps: true,
+  }
+);
 
 export default model<ShutterType>("ShutterType", shutterTypeSchema);

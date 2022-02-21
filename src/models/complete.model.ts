@@ -1,4 +1,4 @@
-import { Schema, Model, model } from "mongoose";
+import { Schema, model, Model } from "mongoose";
 
 export enum COMPLETE {
   YES,
@@ -7,14 +7,21 @@ export enum COMPLETE {
 
 export interface Complete {
   name: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
-const completeSchema = new Schema({
-  name: {
-    type: String,
-    enum: COMPLETE,
-    default: COMPLETE.NO,
+const completeSchema = new Schema(
+  {
+    name: {
+      type: String,
+      enum: COMPLETE,
+      default: COMPLETE.NO,
+    },
   },
-});
+  {
+    timestamps: true,
+  }
+);
 
 export default model<Complete>("Complete", completeSchema);
